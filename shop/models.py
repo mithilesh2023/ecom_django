@@ -9,3 +9,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+class Product(models.Model):
+    name=models.CharField(max_length=200)
+    category=models.ForeignKey(Category, on_delete=models.CASCADE)
+    description=models.TextField()
+    image=models.ImageField()
+    price=models.FloatField()
+    discount_price=models.FloatField(null=True,blank=True)
+    brand=models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

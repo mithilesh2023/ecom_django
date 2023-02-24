@@ -11,4 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     list_display=["id","title","description","slug",'delete_button','update_button']
     list_display_links=['title','slug']
+    prepopulated_fields={"slug":("title",)}
+
 admin.site.register (Category,CategoryAdmin)
+admin.site.register(Product)
