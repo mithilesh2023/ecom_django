@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
+    <div class="container mt-2">
         <div class="row">
+        {% for n in productData %}
             <div class="col-3">
-                <div class="card">
-                    <img src="https://picsum.photos/500" class="w-100" alt="">
-                    <div class="card-body">
-                        <h2>This is Product Title</h2>
-                        <h6>Rs. 500/-</h6>
-                        <a href="" class="btn btn-success">Buy</a>
+                <div class="card" style="height:350px">
+                    <img src="{{n.image.url}}" class="w-100 rounded " style="height:210px" alt="">
+                    <div class="card-body ">
+                        <h2 class="">{{n.name}}</h2>
+                        <div class="d-flex gap-4">
+                        <h6>Rs.<span class="text-danger">{{n.discount_price}}</span>/-</h6>
+                        <h6><strike>Rs. {{n.price}}</strike>/-</h6>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="" class="btn btn-primary">Read More</a>
+                            <a href="" class="btn btn-success w-50">Buy</a>
+                        </div>
+
                     </div>
                 </div>
+                <br>
             </div>
+            {% endfor %}
         </div>
     </div>
 

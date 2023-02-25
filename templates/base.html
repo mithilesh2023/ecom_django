@@ -20,12 +20,12 @@
 <body>
     <nav class="navbar-expand-lg navbar-dark bg-primary ">
         <div class="container d-flex justify-content-between py-2">
-            <a href="" class="navbar-brand">Eshop</a>
+            <a href="" class="navbar-brand fs-1">e-Shop</a>
             <form action="" class="d-flex py-2 ">
                 <input type="text" class="form-control" >
                 <button class="btn btn-success">Go</button>
             </form>
-            <ul class="navbar-nav text-dark ">
+            <ul class="navbar-nav fs-5 mt-2 gap-3 ">
                 <li class="nav-item"><a href="" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href=""class="nav-link">Register</a></li>
                 <li class="nav-item"><a href=""class="nav-link">Login</a></li>
@@ -36,9 +36,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark py-0 bg-secondary">
         <div class="container">
             <ul class="navbar-nav">
-                {% for cat in category %}
+                {% for cat in categoryData %}
                 <li class="nav-item">
-                    <a href="" class="nav-link text-dark ">{{cat.title}}</a>
+                    <a href="" class="nav-link text-white">{{cat.title}}</a>
                 </li>
                 {% endfor %}
            
