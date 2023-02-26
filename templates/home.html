@@ -1,29 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container mt-2">
-        <div class="row">
+<div class="container mt-2">
+    <div class="row">
         {% for n in productData %}
-            <div class="col-3">
-                <div class="card" style="height:350px">
-                    <img src="{{n.image.url}}" class="w-100 rounded " style="height:210px" alt="">
-                    <div class="card-body ">
-                        <h2 class="">{{n.name}}</h2>
-                        <div class="d-flex gap-4">
+        <div class="col-3">
+            <div class="card" style="height:350px">
+                <img src="{{n.image.url}}" class="w-100 rounded " style="height:210px" alt="">
+                <div class="card-body ">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="">{{n.name}}</h3>
+                        <h6 class="">{{n.category}}</h6>
+                    </div>
+                    <div class="d-flex gap-4">
                         <h6>Rs.<span class="text-danger">{{n.discount_price}}</span>/-</h6>
                         <h6><strike>Rs. {{n.price}}</strike>/-</h6>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <a href="" class="btn btn-primary">Read More</a>
-                            <a href="" class="btn btn-success w-50">Buy</a>
-                        </div>
-
                     </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="" class="btn btn-primary">Read More</a>
+                        <a href="" class="btn btn-success w-50">Buy</a>
+                    </div>
+
                 </div>
-                <br>
             </div>
-            {% endfor %}
+            <br>
         </div>
+        {% endfor %}
     </div>
+    <!-- <div class="float-right">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="/products/?page1=" tabindex="-1">start</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href=""tabindex="-1">Prev</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+            <li class="page-item" aria-current="page">
+                <a class="page-link" href="#">2</a>
+            </li>
+
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="">Next</a>
+            </li>
+        </ul>
+    </div> -->
+</div>
 
 {% endblock content %}
