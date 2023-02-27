@@ -16,6 +16,7 @@ class Product(models.Model):
     description=models.TextField()
     image=models.ImageField()
     price=models.FloatField()
+    slug=models.SlugField( null=True,blank=True)
     discount_price=models.FloatField(null=True,blank=True)
     brand=models.CharField(max_length=200)
 

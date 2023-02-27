@@ -38,7 +38,7 @@
             <ul class="navbar-nav">
                 {% for cat in categoryData %}
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">{{cat.title}}</a>
+                    <a href="{% url 'categoryWise' cat.slug %}" class="nav-link text-white">{{cat.title}}</a>
                 </li>
                 {% endfor %}
            
