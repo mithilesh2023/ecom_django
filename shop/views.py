@@ -27,3 +27,10 @@ def categoryWise(r, slug):
         'productData':productData
     }
     return render(r, "home.html",data)
+
+def singleView(r,slug):
+    categoryData=Category.objects.all()
+    data={}
+    data['category']=categoryData
+    data['product']=Product.objects.get(slug=slug)
+    return render(r,"singleView.html",data)
