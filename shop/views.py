@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from shop.models import *
+from .forms import *
 from django.core.paginator import Paginator
 
 def homepage(r):
@@ -13,10 +14,18 @@ def homepage(r):
 
     data={
         'categoryData':categoryData,
-        'productData':productData
+        'productData':productData,
     }
-   
     return render(r, "home.html",data)
+
+def registration(r):
+    form=StudentForm(r.POST or None)
+    if r.method=="POST":
+        if form.is_valid():
+            form.save()
+            return redirect(homepage)
+    return render(r,'registration.html',{'form':form})
+    
 
 def categoryWise(r, slug):
     categoryData=Category.objects.all()

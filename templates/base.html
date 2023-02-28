@@ -15,6 +15,18 @@
             $('#carouselExampleIndicators').carousel({interval:500});
         }
     </script> -->
+    <style>
+        label,.btn{
+            display: block;
+        }
+        input,select{
+            width: 100%;
+            border: 1px solid gray;
+            padding: 10px 5px;
+            border-radius:4px;
+        }
+       
+    </style>
     
 </head>
 <body>
@@ -27,7 +39,7 @@
             </form>
             <ul class="navbar-nav fs-5 mt-2 gap-3 ">
                 <li class="nav-item"><a href="" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href=""class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="{% url 'registration' %}"class="nav-link">Register</a></li>
                 <li class="nav-item"><a href=""class="nav-link">Login</a></li>
                 <li class="nav-item"><a href=""class="nav-link">Cart</a></li>
             </ul>

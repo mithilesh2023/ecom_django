@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.homepage,name="homepage"),
+    path('registration/',views.registration,name="registration"),
     path('category/<slug>/',views.categoryWise,name="categoryWise"),
     path('product/<slug>/',views.singleView,name="singleView"),
 ]

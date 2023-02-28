@@ -1,6 +1,12 @@
 from django.db import models
 
 # Create your models here.
+class Student(models.Model):
+    name=models.CharField(max_length=200,null=True,blank=True)
+    contact=models.IntegerField()
+    email=models.EmailField()
+    password=models.CharField(max_length=200)
+    dob=models.DateField()
 
 class Category(models.Model):
     title=models.CharField(max_length=200)
