@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from shop.models import *
 from .forms import *
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate,login as LoginFun,logout
+from datetime import datetime
 
 def homepage(r):
     categoryData=Category.objects.all()
@@ -43,3 +46,25 @@ def singleView(r,slug):
     data['category']=categoryData
     data['product']=Product.objects.get(slug=slug)
     return render(r,"singleView.html",data)
+
+# ----------------login function start------------------
+def login(r):
+    LoginForm=AuthenticationForm(r,data=r.POST or None)
+    if r.method=='POST':
+        if LoginForm.is_valid():
+            username=LoginForm.cleaned_data.get('username')
+            password=LoginForm.cleaned_data.get('password')
+            user=authenticate(username=username,password=password)
+            if user is not None:
+                print(user)
+                LoginFun(r, user)
+                return redirect(homepage)
+            else:
+                return redirect(login)
+    return render(r,'login.html',{'form':LoginForm})
+
+def logoutFunction(r):
+    logout(r)
+    return redirect(login)
+
+# ----------------login function end------------------
