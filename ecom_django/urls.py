@@ -9,8 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homepage,name="homepage"),
     path('registration/',registration,name="registration"),
-    path('accounts/login/',login,name="login"),
-    path('accounts/logout/',logoutFunction,name="logout"),
+    path('login/',login,name="login"),
+    path('logout/',logoutAuth,name="logout"),
     path('category/<slug>/',categoryWise,name="categoryWise"),
     path('product/<slug>/',singleView,name="singleView"),
 ]

@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from shop.models import *
 from .forms import *
+
 # from django.core.paginator import Paginator
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from shop.forms import RegirationForm
 from django.contrib.auth import authenticate,login as LoginFun,logout
 from datetime import datetime
 
@@ -21,13 +23,25 @@ def homepage(r):
     }
     return render(r, "home.html",data)
 
+# -------regiration function start----------------------------
+# def registration(r):
+#     form=StudentForm(r.POST or None)
+#     if r.method=="POST":
+#         if form.is_valid():
+#             form.save()
+#             return redirect(homepage)
+#     return render(r,'registration.html',{'form':form})
+
 def registration(r):
-    form=StudentForm(r.POST or None)
-    if r.method=="POST":
+    form=RegirationForm(r.POST or None)
+    if r.method=='POST':
         if form.is_valid():
             form.save()
-            return redirect(homepage)
-    return render(r,'registration.html',{'form':form})
+            return redirect(login)
+    data={}
+    data['form']=form
+    return render(r, 'registration.html',data)
+# -------regiration function end----------------------------
     
 
 def categoryWise(r, slug):
@@ -49,22 +63,24 @@ def singleView(r,slug):
 
 # ----------------login function start------------------
 def login(r):
-    LoginForm=AuthenticationForm(r,data=r.POST or None)
+    LoginForm=AuthenticationForm(r.POST or None)
     if r.method=='POST':
-        if LoginForm.is_valid():
-            username=LoginForm.cleaned_data.get('username')
-            password=LoginForm.cleaned_data.get('password')
+            username=r.POST.get('username')
+            password=r.POST.get('password')
+
             user=authenticate(username=username,password=password)
             if user is not None:
-                print(user)
                 LoginFun(r, user)
                 return redirect(homepage)
-            else:
-                return redirect(login)
+
     return render(r,'login.html',{'form':LoginForm})
 
-def logoutFunction(r):
-    logout(r)
-    return redirect(login)
+
 
 # ----------------login function end------------------
+# ----------------logout function start------------------
+
+def logoutAuth(r):
+    logout(r)
+    return redirect(homepage)
+# ----------------logout function end------------------
