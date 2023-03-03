@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/',logoutAuth,name="logout"),
     path('category/<slug>/',categoryWise,name="categoryWise"),
     path('product/<slug>/',singleView,name="singleView"),
+    path("add-to-cart/<slug>/",addToCart,name="addCart"),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

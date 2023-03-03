@@ -12,15 +12,15 @@
                         <table class="table">
                             <tr>
                                 <th>Name</th>
-                                <td>{{proudtct.name}}</td>
+                                <td>{{product.name}}</td>
                             </tr>
                             <tr>
                                 <th>Category</th>
-                                <td>{{proudtct.category}}</td>
+                                <td>{{product.category}}</td>
                             </tr>
                             <tr>
                                 <th>Brand</th>
-                                <td>{{proudtct.brand}}</td>
+                                <td>{{product.brand}}</td>
                             </tr>
                         </table>
                         {% if product.discount_price %}
@@ -29,7 +29,7 @@
                         <h1>₹{{product.price}}</h1>
                         {% endif %}
                         <div class="d-flex gap-2 mb-2">
-                            <a href="" class="btn btn-success">Add to Cart</a>
+                            <a href="{% url 'addCart' product.slug %}" class="btn btn-success">Add to Cart</a>
                             <a href="" class="btn btn-warning">Buy Now</a>
                         </div>
                 </div>
