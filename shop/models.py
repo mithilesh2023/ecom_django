@@ -30,6 +30,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def getSavingParcent(self):
+        result=((self.price-self.discount_price) / self.price)*100
+        return round(result)
+
 class OrderItem(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     ordered=models.BooleanField(default=False)
@@ -38,6 +42,28 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.item.name
+        
+    def get_discount_price(self):
+        return self.item.discount_price*self.qty
+
+    
+    def get_price(self):
+        return self.item.price*self.qty
+    
+    def get_final_amount(self):
+        if self.item.discount_price:
+            return self.get_discount_price()
+        else:
+            return self.get_price()
+
+    # def get_final_amount(self):
+    #     if self.item.discount_price:
+    #         return self.get_discount_price()
+    #     else:
+    #         return self.get_price()
+
+    
+
 
 class Order(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
@@ -45,8 +71,49 @@ class Order(models.Model):
     items=models.ManyToManyField(OrderItem)
     ordered_date=models.DateTimeField(blank=True, null=True)
     created_at=models.DateTimeField(auto_now_add=True)
+    coupon=models.ForeignKey('Coupon', on_delete=models.CASCADE,null=True,blank=True)
     #address,coupon,payments details add further
 
     def __str__(self):
         return self.user.username
+    def get_total_amount(self):
+        total=0
+        for oi in  self.items.all():
+            total +=oi.get_final_amount()
+        return total
 
+
+    def get_total_dis_amount(self):
+        total=0
+        for oi in  self.items.all():
+            total +=oi.get_price()
+        return total
+    
+    def get_price_amount(self):
+        total=0
+        for oi in self.items.all():
+            total +=oi.get_price()
+            return total
+
+    def get_tax_amount(self):
+        return int(self.get_total_amount() * 0.18)
+
+    # def get_payable_amount(self):
+    #     return self.get_total_amount()+self.get_tax_amount()
+
+    def get_discount_amount(self):
+        return self.get_total_dis_amount()- self.get_total_amount()
+
+    def get_payable_amount(self):
+        return self.get_total_amount()+self.get_tax_amount()-self.get_discount_amount()
+def get_payable_couopon_amount(self):
+        return self.get_total_amount()+self.get_tax_amount()-self.get_discount_amount()-self.coupon
+
+        
+
+class Coupon (models.Model):
+    code=models.CharField(max_length=50)
+    amount=models.FloatField()
+
+    def __str__(self):
+        return self.code

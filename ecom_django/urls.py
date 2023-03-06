@@ -14,6 +14,10 @@ urlpatterns = [
     path('category/<slug>/',categoryWise,name="categoryWise"),
     path('product/<slug>/',singleView,name="singleView"),
     path("add-to-cart/<slug>/",addToCart,name="addCart"),
+    path("remove-from-cart/<slug>/",removeFromCart,name="removeCart"),
+    path('cart/',myCart,name='cart'),
+    path('addCoupon/',addCoupon,name="addCoupon"),
+    path('removecoupon/',removeCoupon,name='removecoupon'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -2,37 +2,39 @@
 {% load static %}
 {% block content %}
 <div class="container mt-2">
-    <div class="row">
-        {% for n in productData %}
-        <div class="col-3" title='{{n.name}}'>
-            <div class="card" style="height:350px" title="{{product.name}}">
-                <img src="{{n.image.url}}" class="w-100 rounded " style="height:210px" alt="">
-                <div class="card-body ">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="text-truncate">{{n.name}}</h3>
-                        <h6 class="">{{n.category}}</h6>
+    <div class="mb-5">
+        <div class="row">
+            {% for n in productData %}
+            <div class="col-3" title='{{n.name}}'>
+                <div class="card" style="height:350px;" title="{{product.name}}">
+                    <img src="{{n.image.url}}" class="w-100 rounded " style="height:210px" alt="">
+                    <div class="card-body ">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="text-truncate">{{n.name}}</h3>
+                            <h6 class="">{{n.category}}</h6>
+                        </div>
+                        <div class="d-flex gap-4">
+                            <h6>₹<span class="text-danger">{{n.discount_price}}</span>/-</h6>
+                            <h6><strike>₹{{n.price}}</strike>/-</h6>
+                        </div>
+    
+                        <div class="d-flex justify-content-between">
+                            <a href="" class="btn btn-primary">Read More</a>
+                            <a href="{% url 'singleView' n.slug %}" class="btn btn-success w-50">Buy</a>
+                        </div>
+    
                     </div>
-                    <div class="d-flex gap-4">
-                        <h6>₹<span class="text-danger">{{n.discount_price}}</span>/-</h6>
-                        <h6><strike>₹{{n.price}}</strike>/-</h6>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                        <a href="" class="btn btn-primary">Read More</a>
-                        <a href="{% url 'singleView' n.slug %}" class="btn btn-success w-50">Buy</a>
-                    </div>
-
                 </div>
+                <br>
             </div>
-            <br>
+            {% empty%}
+            <div class="d-flex">
+                <img src="{% static 'sad.gif' %}" alt="">
+            </div>
+            <h2 style="color:#ddd">Not Found Any Product.</h2>
+            <p style="color:gery">Please try to search or find with other keyword or category</p>
+            {% endfor %}
         </div>
-        {% empty%}
-        <div class="d-flex">
-            <img src="{% static 'sad.gif' %}" alt="">
-        </div>
-        <h2 style="color:#ddd">Not Found Any Product.</h2>
-        <p style="color:gery">Please try to search or find with other keyword or category</p>
-        {% endfor %}
     </div>
 </div>
 

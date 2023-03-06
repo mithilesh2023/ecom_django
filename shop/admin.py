@@ -28,5 +28,20 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register (Category,CategoryAdmin)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Student)
-admin.site.register(OrderItem)
+
+class orderi(admin.ModelAdmin):
+     
+
+     list_display=["id","item",]
+     
+
+admin.site.register(OrderItem,orderi)
 admin.site.register(Order)
+class cou(admin.ModelAdmin):
+     search_fields=["id","coupon"]
+     
+
+     list_display=["id","code","amount"]
+     
+
+admin.site.register(Coupon,cou)
