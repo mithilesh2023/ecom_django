@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">Enter Address Details</div>
             <div class="card-body">
-                <form action="{% url 'checkoutWithSaveAddress' %}" method="post">
+                <form action="{% url 'checkout' %}" method="post">
                     {% csrf_token%}
                     {{form|crispy}}
                     <input type="submit" class="btn btn-success">
