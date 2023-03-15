@@ -1,6 +1,7 @@
 from django.contrib import admin
 from shop.models import *
 from django.utils.html import format_html
+
 class CategoryAdmin(admin.ModelAdmin):
     search_fields=["id","title"]
     def delete_button(self,obj):
@@ -30,10 +31,7 @@ admin.site.register(Product,ProductAdmin)
 admin.site.register(Student)
 
 class orderi(admin.ModelAdmin):
-     
-
      list_display=["id","item",]
-     
 
 admin.site.register(OrderItem,orderi)
 admin.site.register(Order)
@@ -45,3 +43,4 @@ class cou(admin.ModelAdmin):
      
 
 admin.site.register(Coupon,cou)
+admin.site.register(Address)

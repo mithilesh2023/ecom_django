@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container d-flex gap-3 mt-5">
+
+
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">Enter Address Details</div>
+            <div class="card-body">
+                <form action="{% url 'checkoutWithSaveAddress' %}" method="post">
+                    {% csrf_token%}
+                    {{form|crispy}}
+                    <input type="submit" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <h2>Saved Address</h2>
+        <div class="d-flex flex-column gap-2">
+            {% for address in addresses %}
+            <form action="{% url 'checkoutWithSaveAddress' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>
+                    <input onChange="this.form.submit()" type="radio" name="saved_address" class="card_radio"
+                        value="{{address.id}}">
+                    <div class="card w-100 mb-2">
+                        <div class="card-body radio_body">
+                            <h4 class="h6">{{address.name}}</h4>
+                            <span>(+91){{address.alt_contact}}</span>
+                            <p>{{address.street}},{{address.landmark}}, {{address.city}}
+                                {{address.state}}-{{address.pincode}}
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <span class="badge bg-danger">{{address.get_type_display}}</span>
+                                {% if address.isDefault %}
+                                <span class="badge bg-success rounded-0">Default</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </label>
+            </form>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock content %}

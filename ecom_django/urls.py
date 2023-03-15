@@ -18,6 +18,9 @@ urlpatterns = [
     path('cart/',myCart,name='cart'),
     path('addCoupon/',addCoupon,name="addCoupon"),
     path('removecoupon/',removeCoupon,name='removecoupon'),
+    path('checkout/',checkout,name='checkout'),
+    path("checkout-with-save/",checkoutWithSaveAddress,name="checkoutWithSaveAddress"),
+
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
